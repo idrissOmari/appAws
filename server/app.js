@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
-mongoose.connect('mongodb+srv://userdb:123123123@cluster0.age2x.mongodb.net/<dbname>?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://userdb:123123123@cluster0.age2x.mongodb.net/io-database?retryWrites=true&w=majority',
 {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE,

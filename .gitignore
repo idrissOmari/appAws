@@ -1,2 +1,3 @@
 *.pem
 server/node_modules
+server/rsa/*

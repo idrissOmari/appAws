@@ -3,6 +3,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
+const index = require('./routes/index');
 
 
 var app = express();
@@ -25,6 +26,7 @@ mongoose.connect('mongodb+srv://userdb:123123123@cluster0.age2x.mongodb.net/io-d
 }
 );
 
+app.use(index)
 app.get('/', (req, res) => {
   res.sendFile(path.join(_dirname, '../public/index.html'));
 })

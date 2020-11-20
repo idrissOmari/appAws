@@ -21,7 +21,7 @@ export class AuthService {
     this.subscription = this.initTimer();
   }
   public initTimer() {
-    return timer(2000, 5000).pipe(
+    return timer(8000, 15000).pipe(
       switchMap(() => {
         console.log('refresh token');
         const storageToken: string = localStorage.getItem(JWT_KEY_STORAGE);

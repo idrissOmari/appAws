@@ -27,8 +27,8 @@ export class SigninComponent implements OnInit {
 
   submit(): void {
     this.authService.signin(this.form.value).subscribe(
-      (token: string) => this.router.navigate(['/']),
-      (err) => this.error = err.error
+      (token: string) => this.router.navigate(['/profile']),
+      (err) => this.error = 'Connexion impossible ! réessayer plutard '
     );
   }
 }

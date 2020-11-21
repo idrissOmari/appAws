@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from 'src/environments/environment';
 
 // Modules
-import { ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './shared/modules/core.module';
 
 // Components
@@ -12,7 +12,12 @@ import { RouterModule } from '@angular/router';
 
 // routing
 import { APP_ROUTING } from './app.routing';
-import { ProfileModule } from './profile/profile.module';
+// ngrx
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducersMap } from './shared/store';
+import { AuthEffects } from './shared/store/effects/auth.effects';
 
 
 @NgModule({
@@ -23,6 +28,14 @@ import { ProfileModule } from './profile/profile.module';
     CoreModule,
     BrowserModule,
     BrowserAnimationsModule,
+    StoreModule.forRoot(reducersMap),
+    StoreDevtoolsModule.instrument({
+      name: 'Ngrx Photos',
+      logOnly: environment.production
+    }),
+    EffectsModule.forRoot([
+      AuthEffects
+    ]),
     RouterModule.forRoot(APP_ROUTING)
   ],
   bootstrap: [

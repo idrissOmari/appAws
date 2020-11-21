@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { State } from 'src/app/shared/store';
+import { TrySignin } from 'src/app/shared/store/actions/auth.actions';
+import { errorAuthSelector } from 'src/app/shared/store/selectors/auth.selectors';
 
 @Component({
   selector: 'app-signin',
@@ -10,12 +13,11 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class SigninComponent implements OnInit {
   public form: FormGroup;
-  public error: string;
+  public error$: Observable<string>;
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
+    private store: Store<State>
   ) { }
 
   ngOnInit(): void {
@@ -23,12 +25,12 @@ export class SigninComponent implements OnInit {
       email: [''],
       password: ['']
     });
+    this.error$ = this.store.pipe(
+      select(errorAuthSelector)
+    );
   }
 
   submit(): void {
-    this.authService.signin(this.form.value).subscribe(
-      (token: string) => this.router.navigate(['/profile']),
-      (err) => this.error = 'Connexion impossible ! réessayer plutard '
-    );
+    this.store.dispatch(new TrySignin(this.form.value));
   }
 }

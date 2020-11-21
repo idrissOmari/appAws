@@ -12,7 +12,7 @@
         <mat-form-field>
           <input formControlName="password"  matInput type="password" placeholder="mot de passe" />
         </mat-form-field>
-        <mat-error *ngIf="error">{{error}}</mat-error>
+        <mat-error *ngIf="error$ | async; let error;">{{error}}</mat-error>
         <button (click)="submit()"  color="primary" mat-raised-button>Valider</button>
       </form>
     </mat-card-content>

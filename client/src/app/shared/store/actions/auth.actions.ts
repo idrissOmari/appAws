@@ -1,4 +1,3 @@
-import { Action } from '@ngrx/store';
 import { CustomAction } from '.';
 import { User } from '../../models/User.model';
 

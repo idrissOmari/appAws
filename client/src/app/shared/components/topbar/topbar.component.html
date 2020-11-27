@@ -1,6 +1,7 @@
 <mat-toolbar color="primary" fxLayoutGap="15px">
   <span class="link" routerLink="/">Mon logo</span>
-  <span fxFlex="auto"></span>
+
+  <input type="text" fxFlex='auto' (keyup)="applyFilter($event.target.value)"/>
 
   <span *ngIf="!(isLoggedIn$ | async)" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="25px" >
     <span class="link" routerLink="/signin">Connexion</span>

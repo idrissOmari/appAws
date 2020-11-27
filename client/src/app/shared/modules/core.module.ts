@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { LayoutModule } from './layout.module';
 
 // Components
-import { HomepageComponent } from 'src/app/components/homepage/homepage.component';
 import { SigninComponent } from 'src/app/components/signin/signin.component';
 import { SignupComponent } from 'src/app/components/signup/signup.component';
 import { TopbarComponent } from '../components/topbar/topbar.component';
@@ -25,7 +24,6 @@ const MODULES = [
 ];
 
 const COMPONENTS = [
-  HomepageComponent,
   SignupComponent,
   SigninComponent,
   TopbarComponent,

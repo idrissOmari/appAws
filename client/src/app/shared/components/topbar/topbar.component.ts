@@ -22,4 +22,7 @@ export class TopbarComponent implements OnInit {
     this.store.dispatch(new Logout());
   }
 
+  applyFilter(value: string) {
+
+  }
 }

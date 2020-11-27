@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { CustomAction } from '.';
 import { User } from '../../models/User.model';
 
 export const TRY_SIGN_UP = '[USER] try signup';
@@ -9,14 +10,9 @@ export const TRY_SIGN_IN = '[USER] try signin';
 export const SIGNIN_SUCCESS = '[USER] signin success';
 export const SIGNIN_ERROR = '[USER] signin error';
 
-export const TRY_FETCH_USER = '[USER] try fetch current user';
-export const SET_CURRENT_USER = '[USER] set current user';
-
 export const TRY_REFRESH_TOKEN = '[USER] try refresh token';
+export const LOG_OUT = '[USER] logout';
 
-export interface CustomAction extends Action {
-  payload?: any;
-}
 
 // SIGNUP
 export class TrySignup implements CustomAction {
@@ -49,28 +45,21 @@ export class SigninError implements CustomAction {
   readonly type: string = SIGNIN_ERROR;
   constructor(public payload: any) {}
 }
-
-// CurrentUser
-export class TryFetchCurrentUser implements CustomAction {
-  readonly type: string = TRY_FETCH_USER;
-  constructor(public payload: any) {}
-}
-
-export class SetCurrentUser implements CustomAction {
-  readonly type: string = SET_CURRENT_USER;
-  constructor(public payload: User) {}
-}
 // Token refresh
 export class TryRefreshToken implements CustomAction {
   readonly type: string = TRY_REFRESH_TOKEN;
 }
 
+// Logout
+export class Logout implements CustomAction {
+  readonly type: string = LOG_OUT;
+}
+
 export type AuthActions = TrySignup
-|TryRefreshToken
-|SignupSuccess
-|SignupError
-|TrySignin
-|SigninSuccess
-|SigninError
-|TryFetchCurrentUser
-|SetCurrentUser;
+| TryRefreshToken
+| SignupSuccess
+| SignupError
+| TrySignin
+| SigninSuccess
+| SigninError
+| Logout;

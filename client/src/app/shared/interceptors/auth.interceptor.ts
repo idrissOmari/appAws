@@ -2,7 +2,6 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 import { State } from '../store';
 import { tokenSelector } from '../store/selectors/auth.selectors';
 
@@ -14,6 +13,7 @@ constructor(private store: Store<State>) {
   this.store.select(tokenSelector).subscribe(token => this.token = token);
 }
 intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  console.log('intercept');
   if (this.token){
     const authReq = req.clone({
       headers: req.headers.set('Authorization', this.token)

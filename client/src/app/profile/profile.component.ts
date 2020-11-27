@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/shared/models/User.model';
-import { UserService } from 'src/app/shared/services/user.service';
+import { State } from '../shared/store';
+import { TryFetchCurrentUser } from '../shared/store/actions/user.actions';
+import { currentUserSelector } from '../shared/store/selectors/auth.selectors';
 
 @Component({
   selector: 'app-profile',
@@ -10,12 +13,12 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class ProfileComponent implements OnInit {
 
-  public currentUser: Observable<User>;
+  public currentUser$: Observable<User>;
 
-  constructor(private userService: UserService) { }
+  constructor(private store: Store<State>) { }
 
   ngOnInit(): void {
-    this.currentUser = this.userService.getCurrentUser();
+    this.store.dispatch(new TryFetchCurrentUser());
+    this.currentUser$ = this.store.select(currentUserSelector);
   }
-
 }

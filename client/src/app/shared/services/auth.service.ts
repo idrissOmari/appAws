@@ -23,49 +23,10 @@ export class AuthService {
             , private store: Store<State>) {
   }
   public initTimer(): Observable<void> {
-    return timer(3000, 10000).pipe(
-      map(() => this.store.dispatch(new TryRefreshToken()))
-    );
-    // return timer(8000, 15000).pipe(
-    //   switchMap(() => {
-    //     console.log('refresh token');
-    //     const storageToken: string = localStorage.getItem(JWT_KEY_STORAGE);
-    //     if (storageToken) {
-    //       return this.http.get<string>('/api/auth/refresh-token').pipe(
-    //         tap((newToken: string) => {
-    //           this.jwtToken.next({
-    //             token: newToken,
-    //             isAuthenticated: true
-    //           });
-    //           localStorage.setItem(JWT_KEY_STORAGE, newToken);
-    //         }, error => {
-    //           console.log('error refresh token', error);
-    //           this.subscription.unsubscribe();
-    //         })
-    //       );
-    //     } else {
-    //       this.subscription.unsubscribe();
-    //       return of(EMPTY);
-    //     }
-    //   })
-    // ).subscribe(() => {},
-    // err => {
-    //   console.log('distroy token');
-    //   this.jwtToken.next({
-    //     token: null,
-    //     isAuthenticated: true
-    //   });
-    //   localStorage.removeItem(JWT_KEY_STORAGE);
-    //   this.subscription.unsubscribe();
-    // });
-  }
-
-  initToken(): void {
-    const storageToken: string = localStorage.getItem(JWT_KEY_STORAGE);
-    this.jwtToken.next({
-      isAuthenticated: storageToken != null,
-      token: storageToken
-    });
+    return EMPTY;
+    //  timer(10000, 20000).pipe(
+    //   map(() => this.store.dispatch(new TryRefreshToken()))
+    // );
   }
 
   signup(user: User): Observable<User>{
@@ -78,11 +39,5 @@ export class AuthService {
 
   refreshToken(): Observable<string> {
     return this.http.get<string>('/api/auth/refresh-token');
-  }
-
-  logout() {
-    localStorage.removeItem(JWT_KEY_STORAGE);
-    this.jwtToken.next({token: null, isAuthenticated: false});
-    this.router.navigate(['/']);
   }
 }

@@ -18,6 +18,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducersMap } from './shared/store';
 import { AuthEffects } from './shared/store/effects/auth.effects';
+import { UserEffects } from './shared/store/effects/user.effects';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { AuthEffects } from './shared/store/effects/auth.effects';
       logOnly: environment.production
     }),
     EffectsModule.forRoot([
-      AuthEffects
+      AuthEffects,
+      UserEffects
     ]),
     RouterModule.forRoot(APP_ROUTING)
   ],
